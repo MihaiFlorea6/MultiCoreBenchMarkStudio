@@ -66,3 +66,10 @@ out
 .vs
 bin
 obj
+# Visual Studio user-specific
+*.vcxproj.user
+CppProperties.json
+*.slnx
+
+# Benchmark outputs
+results.jsonl
