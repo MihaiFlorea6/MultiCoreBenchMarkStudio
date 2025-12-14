@@ -61,12 +61,12 @@ fn run_matmul(n: u64, threads: usize) {
     let n = n as usize;
     if n == 0 { return; }
 
-    // Matrici contigue 1D: A[i*n + j]
+    
     let mut a = vec![0.0f64; n * n];
     let mut b = vec![0.0f64; n * n];
     let mut c = vec![0.0f64; n * n];
 
-    // inițializare deterministă (fără RNG, să fie stabil între rulări)
+    
     for i in 0..n {
         for j in 0..n {
             a[i * n + j] = ((i as f64) + (j as f64)).sin();
@@ -74,13 +74,13 @@ fn run_matmul(n: u64, threads: usize) {
         }
     }
 
-    // Pool cu număr fix de thread-uri
+    
     let pool = rayon::ThreadPoolBuilder::new()
         .num_threads(threads)
         .build()
         .expect("failed to build rayon thread pool");
 
-    // Paralelizăm pe rânduri
+    
     pool.install(|| {
         c.par_chunks_mut(n)
             .enumerate()
@@ -95,7 +95,7 @@ fn run_matmul(n: u64, threads: usize) {
             });
     });
 
-    // anti-optimizare
+    
     std::hint::black_box(&c);
 }
 
@@ -147,10 +147,10 @@ fn run_montecarlo(size: u64, threads: usize) {
 fn merge_sort_parallel(arr: &mut [i32], threads: usize) {
     use rayon::prelude::*;
 
-    // prag: sub dimensiunea asta, sortăm secvențial (altfel overhead mare)
-    const THRESHOLD: usize = 1 << 15; // 32768
+    
+    const THRESHOLD: usize = 1 << 15; 
 
-    // buffer auxiliar (alocat o singură dată)
+    
     let mut tmp = vec![0i32; arr.len()];
 
     let pool = rayon::ThreadPoolBuilder::new()
@@ -168,7 +168,7 @@ fn mergesort_rec(a: &mut [i32], tmp: &mut [i32], threshold: usize) {
     let n = a.len();
     if n <= 1 { return; }
 
-    // dacă e mic, secvențial (folosim sort_unstable ca bază)
+    
     if n <= threshold {
         a.sort_unstable();
         return;
@@ -178,13 +178,13 @@ fn mergesort_rec(a: &mut [i32], tmp: &mut [i32], threshold: usize) {
     let (left, right) = a.split_at_mut(mid);
     let (tmp_left, tmp_right) = tmp.split_at_mut(mid);
 
-    // paralelizăm cele două jumătăți
+    
     join(
         || mergesort_rec(left, tmp_left, threshold),
         || mergesort_rec(right, tmp_right, threshold),
     );
 
-    // merge în tmp, apoi copiem înapoi
+    
     merge_into(left, right, tmp);
     a.copy_from_slice(&tmp[..n]);
 }
@@ -259,7 +259,7 @@ fn fft_rec(x: &mut [num_complex::Complex64]) {
 fn run_fft(size: u64, _threads: usize) {
     let n = size as usize;
 
-    // trebuie putere a lui 2
+    
     if n == 0 || (n & (n - 1)) != 0 {
         return;
     }

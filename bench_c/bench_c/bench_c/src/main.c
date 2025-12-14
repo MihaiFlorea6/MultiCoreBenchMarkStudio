@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
 
     
     {
-        FILE* f = fopen(out_path, "w");
+        FILE* f = fopen(out_path, "a");
         if (!f) { fprintf(stderr, "Cannot open --out file\n"); return 1; }
         fclose(f);
     }

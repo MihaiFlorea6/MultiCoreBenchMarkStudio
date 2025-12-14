@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdint.h>
 
-typedef struct {
+typedef struct Complex{
 	double re;
 	double im;						
 } Complex;	
