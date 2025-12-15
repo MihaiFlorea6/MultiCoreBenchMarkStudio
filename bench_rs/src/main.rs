@@ -290,7 +290,7 @@ fn main() -> anyhow::Result<()> {
     }
 
     
-    std::fs::write(&args.out, "")?;
+    OpenOptions::new().create(true).append(true).open(&args.out)?;
 
     for r in 0..args.runs {
         let t0 = Instant::now();
