@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-typedef struct {
+typedef struct MatMulTask{
 	int tid;
 	int threads;
 	int n;

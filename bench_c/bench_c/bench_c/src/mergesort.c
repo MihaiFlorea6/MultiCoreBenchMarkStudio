@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-typedef struct {
+typedef struct MergeTask{
 	int* arr;
 	int* tmp;
 	int left;

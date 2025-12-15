@@ -77,10 +77,11 @@ int main(int argc, char** argv) {
         rr.seconds = (t1 - t0);
 
         if (!write_result_jsonl(out_path, &rr)) {
-            fprintf(stderr, "Failed writing JSONL\n");
+            fprintf(stderr, "Failed writing in JSONL file\n");
             return 3;
         }
     }
+
 
     printf("OK. Wrote results to %s\n", out_path);
     return 0;

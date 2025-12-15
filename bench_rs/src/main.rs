@@ -198,20 +198,20 @@ fn merge_into(left: &[i32], right: &[i32], out: &mut [i32]) {
     while i < left.len() && j < right.len() {
         if left[i] <= right[j] {
             out[k] = left[i];
-            i += 1;
+            i = i + 1;
         } else {
             out[k] = right[j];
-            j += 1;
+            j = j + 1;
         }
-        k += 1;
+        k = k + 1;
     }
     while i < left.len() {
         out[k] = left[i];
-        i += 1; k += 1;
+        i = i + 1; k = k + 1;
     }
     while j < right.len() {
         out[k] = right[j];
-        j += 1; k += 1;
+        j = j + 1; k = k + 1;
     }
 }
 
@@ -232,7 +232,6 @@ fn run_mergesort(size: u64, threads: usize) {
     std::hint::black_box(&arr);
 
 }
-
 
 fn fft_rec(x: &mut [num_complex::Complex64]) {
     let n = x.len();
@@ -318,7 +317,7 @@ fn main() -> anyhow::Result<()> {
             seconds: sec,
         };
 
-        let mut f = OpenOptions::new().append(true).open(&args.out)?;
+        let mut f = OpenOptions::new().create(true).append(true).open(&args.out)?;
         writeln!(f, "{}", serde_json::to_string(&rr)?)?;
     }
 
