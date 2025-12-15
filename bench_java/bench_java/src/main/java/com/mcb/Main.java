@@ -11,6 +11,9 @@ import java.util.concurrent.*;
 public class Main {
 
     static final String LANG = "java_native";
+    static volatile double SINK_D;
+    static volatile long SINK_L;
+    static volatile Object SINK_O;
 
     static class Args {
         int alg;
@@ -60,7 +63,7 @@ public class Main {
 
     static void writeJsonl(String file, String language, int alg, int threads, int runIndex, long inputSize, double seconds) {
         String line = String.format(
-                "{\"language\":\"%s\",\"alg\":%d,\"threads\":%d,\"run_index\":%d,\"input_size\":%d,\"seconds\":%.9f}%n",
+                "{\"language\":\"%s\",\"alg\":%d,\"threads\":%d,\"run_index\":%d,\"input_size\":%d,\"seconds\":%.12f}%n",
                 language, alg, threads, runIndex, inputSize, seconds
         );
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
@@ -102,6 +105,7 @@ public class Main {
 
 
             if (total == -1.0) System.out.println(total);
+            SINK_D = total;
     }
 
 
@@ -150,6 +154,7 @@ public class Main {
             }
 
             if (C[0] == -123.0) System.out.println(C[0]);
+            SINK_D = C[0];
     }
 
 
@@ -188,6 +193,7 @@ public class Main {
 
             double pi = 4.0 * (double) insideTotal / (double) iterations;
             if (pi == -1.0) System.out.println(pi);
+            SINK_D = pi;
     }
 
 
@@ -207,6 +213,7 @@ public class Main {
 
 
             if (n >= 2 && arr[0] > arr[n - 1]) System.out.println("?");
+            SINK_L = arr[0];
         }
 
         static class MergeSortTask extends RecursiveAction {
@@ -294,7 +301,7 @@ public class Main {
             }
 
             if (re[0] == 123.0) System.out.println(re[0]);
-
+            SINK_D = re[0];
     }
 
     public static void main(String[] argv) {
@@ -316,7 +323,7 @@ public class Main {
             double seconds = (t1 - t0) / 1e9;
 
             writeJsonl(args.out.toString(), LANG, args.alg, args.threads, r, args.size, seconds);
-            System.out.printf("OK. Wrote run %d to %s%n", r, args.out);
+            System.out.printf("OK. Wrote run %d to {%s} %n", r, args.out, seconds);
         }
     }
 }
