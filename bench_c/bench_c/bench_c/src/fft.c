@@ -22,7 +22,7 @@ static Complex c_sub(Complex a, Complex b) {
 static Complex c_mul(Complex a, Complex b) {
 	Complex r = { 
 		a.re * b.re - a.im * b.im ,
-	    a.re * b.im + b.re * a.im
+	    a.re * b.im + a.im * b.re
 	};
 	return r;
 }
