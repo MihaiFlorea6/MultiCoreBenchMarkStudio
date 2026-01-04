@@ -60,8 +60,8 @@ int run_matmul(int threads, uint64_t size) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             int idx = i * n + j;
-            A[idx] = sin((double)(i + j));
-            B[idx] = cos((double)(i - j));
+            A[idx] = (double)(i + j);
+            B[idx] = (double)(i - j);
             C[idx] = 0.0;
         }
     }
