@@ -117,9 +117,13 @@ public class Main {
             double[] B = new double[nn];
             double[] C = new double[nn];
 
-            for (int i = 0; i < nn; i++) {
-                A[i] = Math.sin(i * 0.001);
-                B[i] = Math.cos(i * 0.001);
+            for (int i = 0; i < n; i++){
+                for (int j = 0; j < n; j++){
+                    int idx = i * n + j;
+                    A[idx] = (double)(i + j);
+                    B[idx] = (double)(i - j);
+                    C[idx] = 0.0;
+                }
             }
 
             ExecutorService pool = Executors.newFixedThreadPool(threads);
