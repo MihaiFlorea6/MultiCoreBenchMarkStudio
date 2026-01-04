@@ -1,4 +1,4 @@
-\# MultiCore Benchmark Studio
+# MultiCore Benchmark Studio
 
 
 
@@ -10,7 +10,7 @@ This project measures how different algorithms scale with the number of threads 
 
 
 
-\## Current Status
+## Current Status
 
 
 
@@ -28,7 +28,7 @@ This project measures how different algorithms scale with the number of threads 
 
 
 
-\## What `bench\_c` does
+## What `bench\_c` does
 
 
 
@@ -36,7 +36,7 @@ This project measures how different algorithms scale with the number of threads 
 
 
 
-\### Algorithms implemented
+### Algorithms implemented
 
 
 
@@ -74,7 +74,7 @@ This project measures how different algorithms scale with the number of threads 
 
 
 
-\## Output format (JSONL)
+## Output format (JSONL)
 
 
 
